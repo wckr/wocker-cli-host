@@ -1,14 +1,14 @@
-# Wocker Alias (for local machine)
+# Wocker Aliases (for local machine)
 
 ## Install
 
-If you use Bash:
+Bash user:
 
 ```
 $ curl -fsSL https://raw.githubusercontent.com/ixkaito/wocker-alias/master/bashrc >> ~/.bashrc && source ~/.bashrc
 ```
 
-Else if Zsh:
+Zsh user:
 
 ```
 $ curl -fsSL https://raw.githubusercontent.com/ixkaito/wocker-alias/master/bashrc >> ~/.zashrc && source ~/.zashrc
