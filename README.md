@@ -11,5 +11,5 @@ $ curl -fsSL https://raw.githubusercontent.com/ixkaito/wocker-alias/master/bashr
 Zsh user:
 
 ```
-$ curl -fsSL https://raw.githubusercontent.com/ixkaito/wocker-alias/master/bashrc >> ~/.zashrc && source ~/.zashrc
+$ curl -fsSL https://raw.githubusercontent.com/ixkaito/wocker-alias/master/bashrc >> ~/.zshrc && source ~/.zshrc
 ```
