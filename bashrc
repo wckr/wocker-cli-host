@@ -13,5 +13,15 @@ wocker() {
       cd ~/wocker && vagrant halt
       ;;
 
+    'status' )
+
+      cd ~/wocker && vagrant status
+      ;;
+
+    * )
+
+      cd ~/wocker
+      ;;
+
   esac
 }
