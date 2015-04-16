@@ -4,22 +4,22 @@ wocker() {
   case "$1" in
 
     'up' )
-
       cd ~/wocker && vagrant up && vagrant ssh
       ;;
 
-    'halt' )
+    'ssh' )
+      cd ~/wocker && vagrant ssh
+      ;;
 
+    'halt' )
       cd ~/wocker && vagrant halt
       ;;
 
     'status' )
-
       cd ~/wocker && vagrant status
       ;;
 
     * )
-
       cd ~/wocker
       ;;
 
