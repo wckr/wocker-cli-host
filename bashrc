@@ -24,7 +24,8 @@ wocker() {
       ;;
 
     'attach' | 'build' | 'commit' | 'cp' | 'create' | 'destroy' | 'diff' | 'events' | 'exec' | 'export' | 'help' | '--help' | '-h' | 'history' | 'images' | 'import' | 'info' | 'inspect' | 'kill' | 'load' | 'login' | 'logout' | 'logs' | 'port' | 'pause' | 'ps' | 'pull' | 'push' | 'rename' | 'restart' | 'rm' | 'rmi' | 'run' | 'save' | 'search' | 'start' | 'stats' | 'stop' | 'tag' | 'top' | 'unpause' | 'update' | 'version' | '--version' | '-v' | 'wait' | 'wp' )
-      cd ~/wocker && vagrant ssh -- wocker ${@:2}
+      cd ~/wocker && vagrant ssh -- wocker $@
+      ;;
 
     * )
       cd ~/wocker
@@ -32,4 +33,3 @@ wocker() {
 
   esac
 }
-
