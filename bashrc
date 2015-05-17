@@ -19,6 +19,10 @@ wocker() {
       cd ~/wocker && vagrant status
       ;;
 
+    'reload' )
+      cd ~/wocker && vagrant reload
+      ;;
+
     * )
       cd ~/wocker
       ;;
