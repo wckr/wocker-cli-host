@@ -4,7 +4,7 @@ wocker() {
   case "$1" in
 
     'up' )
-      cd ~/wocker && vagrant up && vagrant ssh
+      cd ~/wocker && vagrant up
       ;;
 
     'ssh' )
