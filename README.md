@@ -1,15 +1,15 @@
-# Wocker Aliases (for local machine)
+# Wocker Cli for the host machine
 
-## Install
+## Installation
 
-Bash user:
-
-```
-$ curl -fsSL https://raw.githubusercontent.com/ixkaito/wocker-alias/master/bashrc >> ~/.bashrc && source ~/.bashrc
-```
-
-Zsh user:
+Wget
 
 ```
-$ curl -fsSL https://raw.githubusercontent.com/ixkaito/wocker-alias/master/bashrc >> ~/.zshrc && source ~/.zshrc
+$ sudo wget -q -O /usr/local/bin/wocker https://raw.githubusercontent.com/ixkaito/wocker-cli-for-host/master/wocker && sudo chmod +x /usr/local/bin/wocker
+```
+
+Curl
+
+```
+$ sudo curl -L -o /usr/local/bin/wocker https://raw.githubusercontent.com/ixkaito/wocker-cli-for-host/master/wocker && sudo chmod +x /usr/local/bin/wocker
 ```
