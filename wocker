@@ -1,35 +1,24 @@
-# Wocker
-wocker() {
+case "$1" in
 
-  case "$1" in
+  #
+  # Commonly used vagrant commands
+  #
+  'up' | 'ssh' | 'halt' | 'status' | 'reload' | 'resume' | 'suspend' )
+    vagrant $@
+    ;;
 
-    'up' )
-      cd ~/wocker && vagrant up
-      ;;
+  #
+  # Docker command aliases
+  #
+  'daemon' | 'attach' | 'build' | 'commit' | 'cp' | 'create' | 'diff' | 'events' | 'exec' | 'export' | 'history' | 'images' | 'import' | 'info' | 'inspect' | 'kill' | 'load' | 'login' | 'logout' | 'logs' | 'network connect' | 'network create' | 'network disconnect' | 'network inspect' | 'network ls' | 'network rm' | 'pause' | 'port' | 'ps' | 'pull' | 'push' | 'rename' | 'restart' | 'rm' | 'rmi' | 'run' | 'save' | 'search' | 'start' | 'stats' | 'stop' | 'tag' | 'top' | 'unpause' | 'version' | 'volume create' | 'volume inspect' | 'volume ls' | 'volume rm' | 'wait' )
+    vagrant ssh -c 'wocker $@'
+    ;;
 
-    'ssh' )
-      cd ~/wocker && vagrant ssh
-      ;;
+  #
+  # Wocker original commands
+  #
+  'destroy' | 'help' | '--help' | '-h' | 'update' | '--version' | '-v' | 'wp' )
+    vagrant ssh -c 'wocker $@'
+    ;;
 
-    'halt' )
-      cd ~/wocker && vagrant halt
-      ;;
-
-    'status' )
-      cd ~/wocker && vagrant status
-      ;;
-
-    'reload' )
-      cd ~/wocker && vagrant reload
-      ;;
-
-    'attach' | 'build' | 'commit' | 'cp' | 'create' | 'destroy' | 'diff' | 'events' | 'exec' | 'export' | 'help' | '--help' | '-h' | 'history' | 'images' | 'import' | 'info' | 'inspect' | 'kill' | 'load' | 'login' | 'logout' | 'logs' | 'port' | 'pause' | 'ps' | 'pull' | 'push' | 'rename' | 'restart' | 'rm' | 'rmi' | 'run' | 'save' | 'search' | 'start' | 'stats' | 'stop' | 'tag' | 'top' | 'unpause' | 'update' | 'version' | '--version' | '-v' | 'wait' | 'wp' )
-      cd ~/wocker && vagrant ssh -- wocker $@
-      ;;
-
-    * )
-      cd ~/wocker
-      ;;
-
-  esac
-}
+esac
