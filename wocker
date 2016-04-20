@@ -18,7 +18,7 @@ case "$1" in
   #
   # Wocker original commands
   #
-  'destroy' | 'help' | '--help' | '-h' | 'update' | '--version' | '-v' | 'wp' )
+  'destroy' | 'help' | '--help' | '-h' | 'switch' | 'update' | '--version' | '-v' | 'wp' )
     WOCKER_COMMAND="wocker $@"
     vagrant ssh -c "${WOCKER_COMMAND}"
     ;;
