@@ -5,7 +5,7 @@ case "$1" in
   #
   'up' )
 
-    if [[ ! "$2" =~ ^-.*$ ]]; then
+    if [[ "$2" && ! "$2" =~ ^-.*$ ]]; then
       WOCKER_COMMAND="wocker start $2"
       vagrant up && vagrant ssh -c "${WOCKER_COMMAND}"
     else
