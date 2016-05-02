@@ -1,6 +1,13 @@
 case "$1" in
 
   #
+  # Stop all containers before `vagrant halt`
+  #
+  'halt' )
+    vagrant ssh -c "wocker stop" && vagrant halt
+    ;;
+
+  #
   # Commonly used vagrant commands
   #
   'up' | 'ssh' | 'halt' | 'status' | 'reload' | 'resume' | 'suspend' )
