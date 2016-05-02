@@ -2,7 +2,7 @@
 
 If you install this tool into your host machine, you will be able to use Wocker commands directly from the host machine without `vagrant ssh`.
 
-## Installation (Mac/Linux)
+## Installation and Update (Mac/Linux)
 
 Wget
 
