@@ -7,7 +7,20 @@ case "$1" in
 
     if [[ "$2" && ! "$2" =~ ^-.*$ ]]; then
       WOCKER_COMMAND="wocker start $2"
-      vagrant up && vagrant ssh -c "${WOCKER_COMMAND}"
+      vagrant $1 && vagrant ssh -c "${WOCKER_COMMAND}"
+    else
+      vagrant $@
+    fi
+    ;;
+
+  #
+  # Start a specific container with `vagrant reload`
+  #
+  'reload' )
+
+    if [[ "$2" && ! "$2" =~ ^-.*$ ]]; then
+      WOCKER_COMMAND="wocker start $2"
+      vagrant ssh -c "wocker stop" && vagrant $1 && vagrant ssh -c "${WOCKER_COMMAND}"
     else
       vagrant $@
     fi
@@ -17,7 +30,7 @@ case "$1" in
   # Stop all containers before `vagrant halt`
   #
   'halt' )
-    vagrant ssh -c "wocker stop" && vagrant halt
+    vagrant ssh -c "wocker stop" && vagrant $1
     ;;
 
   #
