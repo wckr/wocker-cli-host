@@ -32,9 +32,12 @@ case "$1" in
 
     if [[ "$2" && ! "$2" =~ ^-.*$ ]]; then
       WOCKER_COMMAND="wocker start $2"
-      vagrant $1 && vagrant_ssh "${WOCKER_COMMAND}"
+      vagrant $1
+      vagrant ssh-config > "${SSH_CONFIG}"
+      vagrant_ssh "${WOCKER_COMMAND}"
     else
       vagrant $@
+      vagrant ssh-config > "${SSH_CONFIG}"
     fi
     ;;
 
@@ -45,9 +48,13 @@ case "$1" in
 
     if [[ "$2" && ! "$2" =~ ^-.*$ ]]; then
       WOCKER_COMMAND="wocker start $2"
-      vagrant_ssh "wocker stop" && vagrant $1 && vagrant_ssh "${WOCKER_COMMAND}"
+      vagrant_ssh "wocker stop"
+      vagrant $1
+      vagrant ssh-config > "${SSH_CONFIG}"
+      vagrant_ssh "${WOCKER_COMMAND}"
     else
       vagrant $@
+      vagrant ssh-config > "${SSH_CONFIG}"
     fi
     ;;
 
@@ -55,13 +62,14 @@ case "$1" in
   # Stop all containers before `vagrant halt`
   #
   'halt' )
-    vagrant_ssh "wocker stop" && vagrant $1
+    vagrant_ssh "wocker stop"
+    vagrant $1
     ;;
 
   #
   # Commonly used vagrant commands
   #
-  'up' | 'ssh' | 'halt' | 'status' | 'reload' | 'resume' | 'suspend' )
+  'ssh' | 'status' | 'resume' | 'suspend' )
     vagrant $@
     ;;
 
