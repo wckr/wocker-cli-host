@@ -12,12 +12,14 @@ SSH_CONFIG="${DIR}/.ssh_config"
 
 cd ${PWD}
 
-vagrant_ssh() {
+wocker_cli() {
   trap "rm -f '${SSH_CONFIG}'" ERR
   if [ ! -e "${SSH_CONFIG}" ]; then
     vagrant ssh-config > "${SSH_CONFIG}"
   fi
-  ssh -F "${SSH_CONFIG}" wocker "bash -lc '$*'"
+  ssh -F "${SSH_CONFIG}" wocker "bash -l" <<EOT
+wocker "$@"
+EOT
 }
 
 case "$1" in
@@ -28,12 +30,11 @@ case "$1" in
   'up' )
 
     if [[ "$2" && ! "$2" =~ ^-.*$ ]]; then
-      WOCKER_COMMAND="wocker start $2"
       vagrant $1
       vagrant ssh-config > "${SSH_CONFIG}"
-      vagrant_ssh "${WOCKER_COMMAND}"
+      wocker_cli start "$2"
     else
-      vagrant $@
+      vagrant "$@"
       vagrant ssh-config > "${SSH_CONFIG}"
     fi
     ;;
@@ -44,13 +45,12 @@ case "$1" in
   'reload' )
 
     if [[ "$2" && ! "$2" =~ ^-.*$ ]]; then
-      WOCKER_COMMAND="wocker start $2"
-      vagrant_ssh "wocker stop"
+      wocker_cli stop
       vagrant $1
       vagrant ssh-config > "${SSH_CONFIG}"
-      vagrant_ssh "${WOCKER_COMMAND}"
+      wocker_cli start "$2"
     else
-      vagrant $@
+      vagrant "$@"
       vagrant ssh-config > "${SSH_CONFIG}"
     fi
     ;;
@@ -59,7 +59,7 @@ case "$1" in
   # Stop all containers before `vagrant halt`
   #
   'halt' )
-    vagrant_ssh "wocker stop"
+    wocker_cli stop
     vagrant $1
     ;;
 
@@ -67,15 +67,14 @@ case "$1" in
   # Commonly used vagrant commands
   #
   'ssh' | 'status' | 'resume' | 'suspend' )
-    vagrant $@
+    vagrant "$@"
     ;;
 
   #
   # Docker command aliases, Wocker original commands and others just pass through
   #
   * )
-    WOCKER_COMMAND="wocker $@"
-    vagrant_ssh "${WOCKER_COMMAND}"
+    wocker_cli "$@"
     ;;
 
 esac
