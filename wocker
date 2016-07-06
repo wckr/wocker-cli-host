@@ -1,5 +1,18 @@
+#!/bin/sh
+set -e
+
+PWD=$(pwd)
+
+DIR=$(pwd)
+while [ "${DIR}" != "/" -a ! -e "${DIR}/Vagrantfile" ]; do
+  cd ..
+  DIR=$(pwd)
+done
+SSH_CONFIG="${DIR}/.ssh_config"
+
+cd ${PWD}
+
 vagrant_ssh() {
-  SSH_CONFIG=".ssh_config"
   if [ ! -e "${SSH_CONFIG}" ]; then
     vagrant ssh-config > "${SSH_CONFIG}"
   fi
