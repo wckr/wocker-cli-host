@@ -49,17 +49,9 @@ case "$1" in
     ;;
 
   #
-  # Docker command aliases
+  # Docker command aliases, Wocker original commands and others just pass through
   #
-  'daemon' | 'attach' | 'build' | 'commit' | 'cp' | 'create' | 'diff' | 'events' | 'exec' | 'export' | 'history' | 'images' | 'import' | 'info' | 'inspect' | 'kill' | 'load' | 'login' | 'logout' | 'logs' | 'network connect' | 'network create' | 'network disconnect' | 'network inspect' | 'network ls' | 'network rm' | 'pause' | 'port' | 'ps' | 'pull' | 'push' | 'rename' | 'restart' | 'rm' | 'rmi' | 'run' | 'save' | 'search' | 'start' | 'stats' | 'stop' | 'tag' | 'top' | 'unpause' | 'version' | 'volume create' | 'volume inspect' | 'volume ls' | 'volume rm' | 'wait' )
-    WOCKER_COMMAND="wocker $@"
-    vagrant_ssh "${WOCKER_COMMAND}"
-    ;;
-
-  #
-  # Wocker original commands
-  #
-  'destroy' | 'help' | '--help' | '-h' | 'switch' | 'update' | '--version' | '-v' | 'wp' )
+  * )
     WOCKER_COMMAND="wocker $@"
     vagrant_ssh "${WOCKER_COMMAND}"
     ;;
