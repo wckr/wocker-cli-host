@@ -17,6 +17,8 @@ wocker_cli() {
   if [ ! -e "${SSH_CONFIG}" ]; then
     vagrant ssh-config > "${SSH_CONFIG}"
   fi
+  ssh -F "${SSH_CONFIG}" wocker exit
+  trap "" ERR
   echo wocker "$@" | ssh -F "${SSH_CONFIG}" wocker "bash -l"
 }
 
