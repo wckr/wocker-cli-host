@@ -1,3 +1,11 @@
+vagrant_ssh() {
+  SSH_CONFIG=".ssh_config"
+  if [ ! -e "${SSH_CONFIG}" ]; then
+    vagrant ssh-config > "${SSH_CONFIG}"
+  fi
+  ssh -F "${SSH_CONFIG}" wocker "bash -lc '$*'"
+}
+
 case "$1" in
 
   #
@@ -7,7 +15,7 @@ case "$1" in
 
     if [[ "$2" && ! "$2" =~ ^-.*$ ]]; then
       WOCKER_COMMAND="wocker start $2"
-      vagrant $1 && vagrant ssh -c "${WOCKER_COMMAND}"
+      vagrant $1 && vagrant_ssh "${WOCKER_COMMAND}"
     else
       vagrant $@
     fi
@@ -20,7 +28,7 @@ case "$1" in
 
     if [[ "$2" && ! "$2" =~ ^-.*$ ]]; then
       WOCKER_COMMAND="wocker start $2"
-      vagrant ssh -c "wocker stop" && vagrant $1 && vagrant ssh -c "${WOCKER_COMMAND}"
+      vagrant_ssh "wocker stop" && vagrant $1 && vagrant_ssh "${WOCKER_COMMAND}"
     else
       vagrant $@
     fi
@@ -30,7 +38,7 @@ case "$1" in
   # Stop all containers before `vagrant halt`
   #
   'halt' )
-    vagrant ssh -c "wocker stop" && vagrant $1
+    vagrant_ssh "wocker stop" && vagrant $1
     ;;
 
   #
@@ -45,7 +53,7 @@ case "$1" in
   #
   'daemon' | 'attach' | 'build' | 'commit' | 'cp' | 'create' | 'diff' | 'events' | 'exec' | 'export' | 'history' | 'images' | 'import' | 'info' | 'inspect' | 'kill' | 'load' | 'login' | 'logout' | 'logs' | 'network connect' | 'network create' | 'network disconnect' | 'network inspect' | 'network ls' | 'network rm' | 'pause' | 'port' | 'ps' | 'pull' | 'push' | 'rename' | 'restart' | 'rm' | 'rmi' | 'run' | 'save' | 'search' | 'start' | 'stats' | 'stop' | 'tag' | 'top' | 'unpause' | 'version' | 'volume create' | 'volume inspect' | 'volume ls' | 'volume rm' | 'wait' )
     WOCKER_COMMAND="wocker $@"
-    vagrant ssh -c "${WOCKER_COMMAND}"
+    vagrant_ssh "${WOCKER_COMMAND}"
     ;;
 
   #
@@ -53,7 +61,7 @@ case "$1" in
   #
   'destroy' | 'help' | '--help' | '-h' | 'switch' | 'update' | '--version' | '-v' | 'wp' )
     WOCKER_COMMAND="wocker $@"
-    vagrant ssh -c "${WOCKER_COMMAND}"
+    vagrant_ssh "${WOCKER_COMMAND}"
     ;;
 
 esac
