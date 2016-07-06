@@ -17,9 +17,7 @@ wocker_cli() {
   if [ ! -e "${SSH_CONFIG}" ]; then
     vagrant ssh-config > "${SSH_CONFIG}"
   fi
-  ssh -F "${SSH_CONFIG}" wocker "bash -l" <<EOT
-wocker "$@"
-EOT
+  echo wocker "$@" | ssh -F "${SSH_CONFIG}" wocker "bash -l"
 }
 
 case "$1" in
