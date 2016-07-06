@@ -16,7 +16,11 @@ vagrant_ssh() {
   if [ ! -e "${SSH_CONFIG}" ]; then
     vagrant ssh-config > "${SSH_CONFIG}"
   fi
-  ssh -F "${SSH_CONFIG}" wocker "bash -lc '$*'"
+  if grep -q "^Host wocker" "${SSH_CONFIG}"; then
+    ssh -F "${SSH_CONFIG}" wocker "bash -lc '$*'"
+  else
+    rm -f "${SSH_CONFIG}"
+  fi
 }
 
 case "$1" in
