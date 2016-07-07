@@ -65,7 +65,7 @@ case "$1" in
   #
   # Commonly used vagrant commands
   #
-  'ssh' | 'status' | 'resume' | 'suspend' )
+  'halt' | 'reload' | 'resume' | 'ssh' | 'status' | 'suspend' | 'up' )
     vagrant "$@"
     ;;
 
