@@ -9,7 +9,7 @@ while [ "${DIR}" != "/" -a ! -e "${DIR}/Vagrantfile" ]; do
 done
 SSH_CONFIG="${DIR}/.ssh_config"
 
-cd ${PWD}
+cd "${PWD}"
 
 wocker_cli() {
   trap "rm -f '${SSH_CONFIG}'" ERR
