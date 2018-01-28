@@ -70,6 +70,13 @@ case "$1" in
     ;;
 
   #
+  # WP-CLI and Wordmove integration
+  #
+  'wp' | 'wordmove' )
+    vagrant ssh -c "$@"
+    ;;
+
+  #
   # Docker command aliases, Wocker original commands and others just pass through
   #
   * )
