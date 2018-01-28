@@ -73,7 +73,7 @@ case "$1" in
   # WP-CLI and Wordmove integration
   #
   'wp' | 'wordmove' )
-    vagrant ssh -c "$@"
+    vagrant ssh -c "wocker $@"
     ;;
 
   #
